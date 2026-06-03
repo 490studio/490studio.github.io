@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0A0A0F">
+<title>490 Studio · Microsites que conectan</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --bg2: #111118;
+    --bg3: #18181F;
+    --violet: #7C3AED;
+    --violet-light: #A855F7;
+    --violet-dim: rgba(124,58,237,0.15);
+    --violet-border: rgba(124,58,237,0.3);
+    --gold: #F0B429;
+    --gold-dim: rgba(240,180,41,0.12);
+    --gold-border: rgba(240,180,41,0.28);
+    --cyan: #06B6D4;
+    --cyan-dim: rgba(6,182,212,0.1);
+    --cyan-border: rgba(6,182,212,0.25);
+    --white: #FFFFFF;
+    --t1: #F4F4F8;
+    --t2: rgba(244,244,248,0.6);
+    --t3: rgba(244,244,248,0.28);
+    --border: rgba(244,244,248,0.08);
+    --radius: 18px;
+    --radius-sm: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--t1);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse at 80% 0%, rgba(124,58,237,0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 20% 80%, rgba(6,182,212,0.06) 0%, transparent 40%);
+    pointer-events: none; z-index: 0;
+  }
+
+  #app { position: relative; z-index: 1; }
+
+  /* SPLASH */
+  #splash {
+    position: fixed; inset: 0; z-index: 100;
+    background: var(--bg);
+    background-image: radial-gradient(ellipse at 60% 30%, rgba(124,58,237,0.18) 0%, transparent 55%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 48px 32px;
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  #splash.out { opacity: 0; transform: scale(.97); pointer-events: none; }
+
+  .splash-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 100px; font-weight: 800;
+    color: var(--white); line-height: 1;
+    letter-spacing: -.04em;
+    background: linear-gradient(135deg, var(--white) 0%, var(--violet-light) 60%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 2px;
+    animation: glow 3s ease-in-out infinite;
+  }
+  @keyframes glow {
+    0%,100% { filter: drop-shadow(0 0 20px rgba(124,58,237,0.3)); }
+    50% { filter: drop-shadow(0 0 40px rgba(124,58,237,0.6)); }
+  }
+
+  .splash-studio {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px; font-weight: 500;
+    letter-spacing: .3em; text-transform: uppercase;
+    color: var(--t2); margin-bottom: 8px;
+  }
+  .splash-tagline {
+    font-size: 14px; font-weight: 300;
+    color: var(--t3); letter-spacing: .06em;
+    margin-bottom: 40px; text-align: center;
+  }
+  .splash-btn {
+    background: linear-gradient(135deg, var(--violet) 0%, var(--violet-light) 100%);
+    color: var(--white);
+    border: none; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 500;
+    padding: 16px 40px; cursor: pointer;
+    width: 100%; max-width: 300px;
+    transition: transform .15s, opacity .15s;
+    margin-bottom: 12px;
+    box-shadow: 0 8px 32px rgba(124,58,237,0.4);
+  }
+  .splash-btn:active { transform: scale(.97); opacity: .9; }
+  .splash-city { font-size: 12px; color: var(--t3); letter-spacing: .08em; }
+
+  /* Header */
+  .header {
+    background: rgba(10,10,15,0.95);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+    display: flex; align-items: center; gap: 12px;
+    position: sticky; top: 0; z-index: 10;
+  }
+  .h-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px; font-weight: 800;
+    background: linear-gradient(135deg, var(--white) 0%, var(--violet-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -.01em;
+  }
+  .h-sub { font-size: 10px; color: var(--t3); letter-spacing: .1em; text-transform: uppercase; margin-top: 1px; }
+  .h-cta {
+    margin-left: auto;
+    background: linear-gradient(135deg, var(--violet) 0%, var(--violet-light) 100%);
+    color: var(--white);
+    border: none; border-radius: 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 500;
+    padding: 8px 16px; cursor: pointer;
+    text-decoration: none; white-space: nowrap;
+    flex-shrink: 0; transition: opacity .15s;
+    box-shadow: 0 4px 14px rgba(124,58,237,0.35);
+  }
+  .h-cta:active { opacity: .85; }
+
+  /* Hero */
+  .hero {
+    padding: 40px 20px 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--violet-light);
+    background: var(--violet-dim);
+    border: 1px solid var(--violet-border);
+    padding: 5px 14px; border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px; font-weight: 700;
+    color: var(--t1); line-height: 1.15;
+    margin-bottom: 14px;
+    letter-spacing: -.02em;
+  }
+  .hero-title em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--violet-light) 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    font-size: 15px; font-weight: 300;
+    color: var(--t2); line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 10px; margin-bottom: 24px;
+  }
+  .hs {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px 10px; text-align: center;
+  }
+  .hs-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 24px; font-weight: 700;
+    color: var(--violet-light);
+  }
+  .hs-label { font-size: 11px; color: var(--t3); margin-top: 4px; }
+
+  .hero-cta {
+    display: block; width: 100%;
+    background: linear-gradient(135deg, var(--violet) 0%, var(--violet-light) 100%);
+    color: var(--white); border: none; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 500;
+    padding: 16px; cursor: pointer;
+    text-decoration: none; text-align: center;
+    box-shadow: 0 8px 28px rgba(124,58,237,0.4);
+    transition: opacity .15s;
+  }
+  .hero-cta:active { opacity: .85; }
+
+  /* Section */
+  .section { padding: 32px 20px 0; }
+  .sec-label {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--t3); margin-bottom: 16px;
+  }
+  .sec-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px; font-weight: 700;
+    color: var(--t1); margin-bottom: 8px;
+    letter-spacing: -.01em;
+  }
+  .sec-sub {
+    font-size: 14px; font-weight: 300;
+    color: var(--t2); line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  /* About */
+  .about-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 20px; margin-bottom: 10px;
+  }
+  .about-quote {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px; font-weight: 500;
+    color: var(--t1); line-height: 1.5;
+    margin-bottom: 14px; font-style: italic;
+  }
+  .about-quote span { color: var(--gold); font-style: normal; }
+  .about-text {
+    font-size: 13px; font-weight: 300;
+    color: var(--t2); line-height: 1.8;
+  }
+
+  /* Services */
+  .service-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden; margin-bottom: 12px;
+    cursor: pointer; transition: border-color .2s;
+  }
+  .service-card:active { border-color: rgba(255,255,255,0.15); }
+  .service-card.featured { border-color: var(--violet-border); }
+
+  .sc-header {
+    padding: 18px 20px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .sc-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .sc-info { flex: 1; }
+  .sc-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px; font-weight: 600; color: var(--t1);
+    margin-bottom: 3px;
+  }
+  .sc-desc { font-size: 12px; color: var(--t2); }
+  .sc-price {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px; font-weight: 700; color: var(--violet-light);
+    text-align: right; flex-shrink: 0;
+  }
+  .sc-price span { font-size: 11px; font-family: 'DM Sans', sans-serif; color: var(--t3); display: block; }
+  .sc-arrow { color: var(--t3); font-size: 14px; flex-shrink: 0; transition: transform .25s; }
+  .service-card.open .sc-arrow { transform: rotate(180deg); }
+
+  .sc-detail {
+    max-height: 0; overflow: hidden;
+    transition: max-height .4s ease, opacity .3s ease;
+    opacity: 0;
+  }
+  .sc-detail.open { max-height: 400px; opacity: 1; }
+  .sc-detail-inner {
+    border-top: 1px solid var(--border);
+    padding: 16px 20px 18px;
+  }
+  .sc-includes {
+    display: flex; flex-direction: column; gap: 8px;
+    margin-bottom: 14px;
+  }
+  .si {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--t2);
+  }
+  .si-dot { color: var(--violet-light); font-size: 10px; flex-shrink: 0; }
+  .sc-cta {
+    display: block; width: 100%;
+    background: linear-gradient(135deg, var(--violet) 0%, var(--violet-light) 100%);
+    color: var(--white); border: none; border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 500;
+    padding: 12px; cursor: pointer;
+    text-decoration: none; text-align: center;
+    transition: opacity .15s;
+  }
+  .sc-cta:active { opacity: .85; }
+
+  /* Portfolio */
+  .portfolio-grid {
+    display: flex; flex-direction: column; gap: 10px;
+    margin-bottom: 10px;
+  }
+  .portfolio-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    display: flex; align-items: center; gap: 14px;
+    cursor: pointer; transition: border-color .2s;
+  }
+  .portfolio-card:active { border-color: rgba(255,255,255,0.15); }
+  .pc-icon {
+    width: 46px; height: 46px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .pc-info { flex: 1; }
+  .pc-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px; font-weight: 600; color: var(--t1);
+    margin-bottom: 3px;
+  }
+  .pc-type { font-size: 12px; color: var(--t2); }
+  .pc-badge {
+    font-size: 10px; font-weight: 500;
+    padding: 3px 10px; border-radius: 10px;
+    flex-shrink: 0; white-space: nowrap;
+  }
+  .badge-basic { background: var(--cyan-dim); color: var(--cyan); border: 1px solid var(--cyan-border); }
+  .badge-sales { background: var(--violet-dim); color: var(--violet-light); border: 1px solid var(--violet-border); }
+  .badge-complex { background: var(--gold-dim); color: var(--gold); border: 1px solid var(--gold-border); }
+
+  /* Process */
+  .process-step {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 0; border-bottom: 1px solid var(--border);
+  }
+  .process-step:last-child { border-bottom: none; }
+  .ps-num {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--violet-dim); border: 1px solid var(--violet-border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 700; color: var(--violet-light);
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .ps-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px; font-weight: 600; color: var(--t1);
+    margin-bottom: 4px;
+  }
+  .ps-desc { font-size: 13px; font-weight: 300; color: var(--t2); line-height: 1.6; }
+  .ps-time {
+    display: inline-block; margin-top: 6px;
+    font-size: 11px; font-weight: 500;
+    background: var(--gold-dim); color: var(--gold);
+    border: 1px solid var(--gold-border);
+    padding: 3px 10px; border-radius: 10px;
+  }
+
+  /* CTA block */
+  .cta-block {
+    margin: 32px 20px 40px;
+    background: var(--bg2);
+    border: 1px solid var(--violet-border);
+    border-radius: var(--radius);
+    padding: 32px 24px; text-align: center;
+    background-image: radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.1) 0%, transparent 60%);
+  }
+  .cb-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 48px; font-weight: 800;
+    background: linear-gradient(135deg, var(--violet-light) 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+  }
+  .cb-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 24px; font-weight: 700;
+    color: var(--t1); line-height: 1.2; margin-bottom: 8px;
+  }
+  .cb-sub { font-size: 13px; font-weight: 300; color: var(--t2); margin-bottom: 24px; line-height: 1.6; }
+  .cb-btn {
+    display: block; width: 100%;
+    background: linear-gradient(135deg, var(--violet) 0%, var(--violet-light) 100%);
+    color: var(--white); border: none; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 500;
+    padding: 16px; cursor: pointer;
+    text-decoration: none; margin-bottom: 10px;
+    box-shadow: 0 8px 28px rgba(124,58,237,0.4);
+    transition: opacity .15s;
+  }
+  .cb-btn:active { opacity: .85; }
+  .cb-btn.outline {
+    background: transparent;
+    border: 1px solid var(--border); color: var(--t2);
+    box-shadow: none;
+  }
+  .cb-verse {
+    margin-top: 16px; padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px; font-style: italic;
+    color: var(--t3); line-height: 1.6;
+  }
+  .cb-verse span { color: var(--gold); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in { animation: fadeUp .4s ease forwards; }
+</style>
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="splash-number">490</div>
+  <div class="splash-studio">Studio</div>
+  <div class="splash-tagline">Microsites que conectan · Guadalajara & Puerto Vallarta</div>
+  <button class="splash-btn" onclick="startApp()">Conocer el estudio ✦</button>
+  <div class="splash-city">Diseño interactivo para negocios que quieren crecer</div>
+</div>
+
+<!-- APP -->
+<div id="app">
+
+  <div class="header">
+    <div>
+      <div class="h-logo">490 Studio</div>
+      <div class="h-sub">Microsites que conectan</div>
+    </div>
+    <a href="#contacto" class="h-cta">Hablemos ✦</a>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero fade-in">
+    <div class="hero-tag">✦ Guadalajara & Puerto Vallarta</div>
+    <div class="hero-title">Tu negocio merece<br>una <em>presencia digital</em><br>que realmente conecte</div>
+    <div class="hero-sub">Creamos microsites interactivos que reemplazan los PDFs aburridos, los grupos de WhatsApp caóticos y las preguntas repetidas — y llevan a tus clientes directo a la acción.</div>
+    <div class="hero-stats">
+      <div class="hs">
+        <div class="hs-num">8+</div>
+        <div class="hs-label">proyectos entregados</div>
+      </div>
+      <div class="hs">
+        <div class="hs-num">5</div>
+        <div class="hs-label">días de entrega</div>
+      </div>
+      <div class="hs">
+        <div class="hs-num">∞</div>
+        <div class="hs-label">sin límite de revisiones</div>
+      </div>
+    </div>
+    <a href="#contacto" class="hero-cta">Quiero mi microsite →</a>
+  </div>
+
+  <!-- Sobre mí -->
+  <div class="section">
+    <div class="sec-label">Sobre 490 Studio</div>
+    <div class="about-card">
+      <div class="about-quote">"Nació de una necesidad real — la mía. Vi cómo un microsite interactivo podía <span>transformar la forma en que un negocio se comunica</span> con sus clientes."</div>
+      <div class="about-text">Soy Ana Jasso, diseñadora de experiencias digitales interactivas desde Guadalajara, con presencia en Puerto Vallarta. Cada microsite que creo está pensado para que tu cliente entienda, confíe y actúe — sin confusión, sin llamadas innecesarias, sin PDFs que nadie abre.<br><br>El nombre 490 viene de "setenta veces siete" — un deseo genuino para cada cliente que trabaja conmigo.</div>
+    </div>
+  </div>
+
+  <!-- Servicios -->
+  <div class="section">
+    <div class="sec-label">Servicios y precios</div>
+
+    <div class="service-card" onclick="toggleService('s1')">
+      <div class="sc-header">
+        <div class="sc-icon" style="background:var(--cyan-dim);border:1px solid var(--cyan-border);">📋</div>
+        <div class="sc-info">
+          <div class="sc-name">Microsite Informativo</div>
+          <div class="sc-desc">Guías, calendarios, reglas, info organizada</div>
+        </div>
+        <div class="sc-price">$3,500<span>desde</span></div>
+        <div class="sc-arrow">▾</div>
+      </div>
+      <div class="sc-detail" id="s1">
+        <div class="sc-detail-inner">
+          <div class="sc-includes">
+            <div class="si"><span class="si-dot">◆</span>Hasta 6 secciones de contenido</div>
+            <div class="si"><span class="si-dot">◆</span>Acordeón interactivo</div>
+            <div class="si"><span class="si-dot">◆</span>Diseño mobile-first</div>
+            <div class="si"><span class="si-dot">◆</span>Botón de WhatsApp o llamada</div>
+            <div class="si"><span class="si-dot">◆</span>Listo para publicar en 5 días</div>
+          </div>
+          <a href="#contacto" class="sc-cta">Quiero este microsite</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-card featured" onclick="toggleService('s2')">
+      <div class="sc-header">
+        <div class="sc-icon" style="background:var(--violet-dim);border:1px solid var(--violet-border);">🚀</div>
+        <div class="sc-info">
+          <div class="sc-name">Microsite de Ventas</div>
+          <div class="sc-desc">Servicios, precios, CTA y proceso de compra</div>
+        </div>
+        <div class="sc-price">$5,000<span>desde</span></div>
+        <div class="sc-arrow">▾</div>
+      </div>
+      <div class="sc-detail" id="s2">
+        <div class="sc-detail-inner">
+          <div class="sc-includes">
+            <div class="si"><span class="si-dot">◆</span>Servicios expandibles con precios</div>
+            <div class="si"><span class="si-dot">◆</span>Sección de membresías o paquetes</div>
+            <div class="si"><span class="si-dot">◆</span>Botones de reserva y pago</div>
+            <div class="si"><span class="si-dot">◆</span>Testimonios y sección "cómo funciona"</div>
+            <div class="si"><span class="si-dot">◆</span>Diseño con identidad visual del negocio</div>
+            <div class="si"><span class="si-dot">◆</span>Entrega en 7 días</div>
+          </div>
+          <a href="#contacto" class="sc-cta">Quiero este microsite</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-card" onclick="toggleService('s3')">
+      <div class="sc-header">
+        <div class="sc-icon" style="background:var(--gold-dim);border:1px solid var(--gold-border);">✦</div>
+        <div class="sc-info">
+          <div class="sc-name">Microsite Complejo</div>
+          <div class="sc-desc">Flujos personalizados, múltiples tabs y lógica</div>
+        </div>
+        <div class="sc-price">$8,000<span>desde</span></div>
+        <div class="sc-arrow">▾</div>
+      </div>
+      <div class="sc-detail" id="s3">
+        <div class="sc-detail-inner">
+          <div class="sc-includes">
+            <div class="si"><span class="si-dot">◆</span>Flujo interactivo personalizado por tipo de usuario</div>
+            <div class="si"><span class="si-dot">◆</span>Múltiples pestañas y categorías</div>
+            <div class="si"><span class="si-dot">◆</span>Modelos, paquetes o disciplinas con detalle</div>
+            <div class="si"><span class="si-dot">◆</span>FAQ interactivo</div>
+            <div class="si"><span class="si-dot">◆</span>Integración con links de pago externos</div>
+            <div class="si"><span class="si-dot">◆</span>Entrega en 10 días</div>
+          </div>
+          <a href="#contacto" class="sc-cta">Quiero este microsite</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-card" onclick="toggleService('s4')">
+      <div class="sc-header">
+        <div class="sc-icon" style="background:rgba(255,255,255,0.05);border:1px solid var(--border);">🔄</div>
+        <div class="sc-info">
+          <div class="sc-name">Actualización o Ajuste</div>
+          <div class="sc-desc">Cambios en microsites ya entregados</div>
+        </div>
+        <div class="sc-price">$800<span>desde</span></div>
+        <div class="sc-arrow">▾</div>
+      </div>
+      <div class="sc-detail" id="s4">
+        <div class="sc-detail-inner">
+          <div class="sc-includes">
+            <div class="si"><span class="si-dot">◆</span>Cambios de precios, fechas o textos</div>
+            <div class="si"><span class="si-dot">◆</span>Agregar nuevas secciones</div>
+            <div class="si"><span class="si-dot">◆</span>Cambios de color o identidad visual</div>
+            <div class="si"><span class="si-dot">◆</span>Entrega en 48 horas</div>
+          </div>
+          <a href="#contacto" class="sc-cta">Solicitar actualización</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Branding Add-ons -->
+  <div class="section">
+    <div class="sec-label">✦ Add-ons de branding</div>
+    <div class="sec-title">¿Necesitas identidad<br>visual también?</div>
+    <div class="sec-sub">Si tu negocio aún no tiene nombre, colores o logo — lo construimos antes del microsite. Cada add-on se suma al servicio que elijas.</div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;">
+
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;display:flex;align-items:center;gap:14px;">
+        <div style="width:42px;height:42px;border-radius:12px;background:var(--gold-dim);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🎨</div>
+        <div style="flex:1;">
+          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--t1);margin-bottom:2px;">Paleta de colores</div>
+          <div style="font-size:12px;color:var(--t2);">5 colores + tipografías + guía de uso</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;">
+          <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--gold);">+$800</div>
+          <div style="font-size:10px;color:var(--t3);margin-top:2px;">add-on</div>
+        </div>
+      </div>
+
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;display:flex;align-items:center;gap:14px;">
+        <div style="width:42px;height:42px;border-radius:12px;background:var(--gold-dim);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">✏️</div>
+        <div style="flex:1;">
+          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--t1);margin-bottom:2px;">Naming</div>
+          <div style="font-size:12px;color:var(--t2);">Nombre de marca + significado + opciones</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;">
+          <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--gold);">+$1,200</div>
+          <div style="font-size:10px;color:var(--t3);margin-top:2px;">add-on</div>
+        </div>
+      </div>
+
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;display:flex;align-items:center;gap:14px;">
+        <div style="width:42px;height:42px;border-radius:12px;background:var(--gold-dim);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🖼️</div>
+        <div style="flex:1;">
+          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--t1);margin-bottom:2px;">Logo básico</div>
+          <div style="font-size:12px;color:var(--t2);">Logotipo en versión color y blanco/negro</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;">
+          <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--gold);">+$2,500</div>
+          <div style="font-size:10px;color:var(--t3);margin-top:2px;">add-on</div>
+        </div>
+      </div>
+
+      <div style="background:linear-gradient(135deg,rgba(124,58,237,0.15) 0%,rgba(240,180,41,0.1) 100%);border:1px solid var(--gold-border);border-radius:var(--radius);padding:18px 18px;display:flex;align-items:center;gap:14px;">
+        <div style="width:42px;height:42px;border-radius:12px;background:var(--gold-dim);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⭐</div>
+        <div style="flex:1;">
+          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--t1);margin-bottom:2px;">Branding completo</div>
+          <div style="font-size:12px;color:var(--t2);">Naming + paleta + logo · Todo incluido</div>
+          <div style="font-size:10px;color:var(--gold);margin-top:4px;font-weight:500;">✦ Ahorras $1,000 vs. individual</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0;">
+          <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--gold);">+$3,500</div>
+          <div style="font-size:10px;color:var(--t3);margin-top:2px;">add-on</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="background:var(--violet-dim);border:1px solid var(--violet-border);border-radius:10px;padding:14px 16px;margin-bottom:10px;">
+      <div style="font-size:12px;color:var(--violet-light);font-weight:500;margin-bottom:4px;">✦ ¿No sabes por dónde empezar?</div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.6;">Llena el cuestionario de onboarding y en la primera conversación te recomendamos qué necesitas exactamente.</div>
+    </div>
+  </div>
+
+  <!-- Portafolio -->
+  <div class="section">
+    <div class="sec-label">Portafolio</div>
+    <div class="sec-title">Proyectos reales,<br>resultados reales</div>
+    <div class="sec-sub">Cada microsite tiene su propia identidad visual. Ninguno se parece al otro.</div>
+
+    <div class="portfolio-grid">
+      <div class="portfolio-card">
+        <div class="pc-icon" style="background:rgba(10,42,110,0.3);border:1px solid rgba(10,42,110,0.4);">🐏</div>
+        <div class="pc-info">
+          <div class="pc-name">Club Borregos</div>
+          <div class="pc-type">Guía de reinscripciones · Flujo personalizado</div>
+        </div>
+        <div class="pc-badge badge-complex">Complejo</div>
+      </div>
+      <div class="portfolio-card">
+        <div class="pc-icon" style="background:rgba(138,158,140,0.15);border:1px solid rgba(138,158,140,0.3);">🌿</div>
+        <div class="pc-info">
+          <div class="pc-name">Nutrióloga</div>
+          <div class="pc-type">Consultas, membresías y agendar cita</div>
+        </div>
+        <div class="pc-badge badge-sales">Ventas</div>
+      </div>
+      <div class="portfolio-card">
+        <div class="pc-icon" style="background:rgba(212,168,67,0.1);border:1px solid rgba(212,168,67,0.25);">🍝</div>
+        <div class="pc-info">
+          <div class="pc-name">Trattoria Napoli</div>
+          <div class="pc-type">Menú interactivo con 5 categorías</div>
+        </div>
+        <div class="pc-badge badge-sales">Ventas</div>
+      </div>
+      <div class="portfolio-card">
+        <div class="pc-icon" style="background:rgba(196,131,122,0.1);border:1px solid rgba(196,131,122,0.25);">💍</div>
+        <div class="pc-info">
+          <div class="pc-name">Villa Serena</div>
+          <div class="pc-type">Salón de bodas · Paquetes y FAQ</div>
+        </div>
+        <div class="pc-badge badge-complex">Complejo</div>
+      </div>
+      <div class="portfolio-card">
+        <div class="pc-icon" style="background:rgba(212,145,122,0.1);border:1px solid rgba(212,145,122,0.25);">🌸</div>
+        <div class="pc-info">
+          <div class="pc-name">Lumière Spa</div>
+          <div class="pc-type">Tratamientos, membresías y reservas</div>
+        </div>
+        <div class="pc-badge badge-sales">Ventas</div>
+      </div>
+      <div class="portfolio-card">
+        <div class="pc-icon" style="background:rgba(232,22,106,0.1);border:1px solid rgba(232,22,106,0.25);">🏎️</div>
+        <div class="pc-info">
+          <div class="pc-name">Campamentos TEC F1</div>
+          <div class="pc-type">Preventa, precios y registro directo</div>
+        </div>
+        <div class="pc-badge badge-sales">Ventas</div>
+      </div>
+      <div class="portfolio-card">
+        <div class="pc-icon" style="background:rgba(19,64,160,0.15);border:1px solid rgba(19,64,160,0.3);">⚽</div>
+        <div class="pc-info">
+          <div class="pc-name">Clínicas Deportivas</div>
+          <div class="pc-type">3 disciplinas · Preventa vs precio regular</div>
+        </div>
+        <div class="pc-badge badge-sales">Ventas</div>
+      </div>
+      <div class="portfolio-card">
+        <div class="pc-icon" style="background:rgba(45,106,79,0.15);border:1px solid rgba(45,106,79,0.3);">🌲</div>
+        <div class="pc-info">
+          <div class="pc-name">Bosque Alto</div>
+          <div class="pc-type">Desarrollo inmobiliario · Modelos y proceso</div>
+        </div>
+        <div class="pc-badge badge-complex">Complejo</div>
+      </div>
+    </div>
+
+    <div style="background:var(--violet-dim);border:1px solid var(--violet-border);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:10px;">
+      <div style="font-size:12px;color:var(--violet-light);font-weight:500;margin-bottom:4px;">✦ Cada proyecto es único</div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.6;">Diseño la identidad visual desde cero para cada cliente — colores, tipografía y tono acordes a su negocio.</div>
+    </div>
+  </div>
+
+  <!-- Proceso -->
+  <div class="section">
+    <div class="sec-label">Cómo trabajamos</div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:6px 20px;margin-bottom:10px;">
+      <div class="process-step">
+        <div class="ps-num">1</div>
+        <div>
+          <div class="ps-title">Me cuentas tu proyecto</div>
+          <div class="ps-desc">Por WhatsApp me compartes de qué trata tu negocio, qué necesitas comunicar y a quién va dirigido.</div>
+          <div class="ps-time">⚡ Mismo día</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="ps-num">2</div>
+        <div>
+          <div class="ps-title">Te propongo la estructura</div>
+          <div class="ps-desc">Te envío una propuesta de secciones, flujo y estética. Ajustamos hasta que quede perfecto antes de arrancar.</div>
+          <div class="ps-time">⚡ 24–48 horas</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="ps-num">3</div>
+        <div>
+          <div class="ps-title">Diseño y desarrollo</div>
+          <div class="ps-desc">Construyo tu microsite con identidad visual propia — colores, tipografía y tono que representen a tu negocio.</div>
+          <div class="ps-time">⚡ 3–7 días</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="ps-num">4</div>
+        <div>
+          <div class="ps-title">Revisiones y ajustes</div>
+          <div class="ps-desc">Te entrego el microsite para revisión. Hacemos todos los cambios necesarios hasta que estés 100% satisfecho.</div>
+          <div class="ps-time">⚡ 1–2 días</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="ps-num">5</div>
+        <div>
+          <div class="ps-title">Publicación y listo</div>
+          <div class="ps-desc">Te ayudo a publicarlo en GitHub Pages o donde prefieras. Te entrego el archivo y el link para compartir.</div>
+          <div class="ps-time">⚡ Mismo día</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block" id="contacto">
+    <div class="cb-number">490</div>
+    <div class="cb-title">¿Listo para conectar<br>con tus clientes?</div>
+    <div class="cb-sub">Cuéntame tu proyecto por WhatsApp — en menos de 24 horas te tengo una propuesta.</div>
+    <a href="https://wa.me/523312345678?text=Hola%2C%20me%20interesa%20un%20microsite%20para%20mi%20negocio" target="_blank" class="cb-btn">Escribir a 490 Studio ✦</a>
+    <a href="mailto:hola@490studio.mx" class="cb-btn outline">hola@490studio.mx</a>
+    <div class="cb-verse">"Lo que tu negocio siembra en la vida de tus clientes,<br>que vuelva a ti en <span>abundancia sin límite</span>."<br><br>— Con ese deseo crea cada microsite 490 Studio</div>
+  </div>
+
+</div>
+
+<script>
+  function startApp() {
+    var s = document.getElementById('splash');
+    s.classList.add('out');
+    setTimeout(function() { s.style.display = 'none'; }, 600);
+  }
+
+  function toggleService(id) {
+    var detail = document.getElementById(id);
+    var card = detail.closest('.service-card');
+    var isOpen = detail.classList.contains('open');
+    document.querySelectorAll('.sc-detail').forEach(function(d) { d.classList.remove('open'); });
+    document.querySelectorAll('.service-card').forEach(function(c) { c.classList.remove('open'); });
+    if (!isOpen) {
+      detail.classList.add('open');
+      card.classList.add('open');
+      setTimeout(function() { card.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 200);
+    }
+  }
+</script>
+</body>
+</html>
