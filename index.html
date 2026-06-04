@@ -55,34 +55,66 @@
   #splash {
     position: fixed; inset: 0; z-index: 100;
     background: var(--bg);
-    background-image: radial-gradient(ellipse at 60% 30%, rgba(124,58,237,0.18) 0%, transparent 55%);
+    background-image:
+      radial-gradient(ellipse at 35% 45%, rgba(124,58,237,0.5) 0%, transparent 45%),
+      radial-gradient(ellipse at 72% 42%, rgba(234,88,12,0.4) 0%, transparent 35%),
+      radial-gradient(ellipse at 55% 48%, rgba(219,39,119,0.2) 0%, transparent 30%);
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
     padding: 48px 32px;
     transition: opacity .6s ease, transform .6s ease;
   }
   #splash.out { opacity: 0; transform: scale(.97); pointer-events: none; }
+
   .splash-number {
     font-family: 'Syne', sans-serif;
     font-size: 100px; font-weight: 800;
     color: var(--white); line-height: 1;
     letter-spacing: -.04em;
-    background: linear-gradient(135deg, var(--white) 0%, var(--violet-light) 60%, var(--gold) 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    margin-bottom: 2px; animation: glow 3s ease-in-out infinite;
+    background: linear-gradient(90deg, #A855F7 0%, #EC4899 50%, #F97316 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 2px;
+    filter: drop-shadow(0 0 24px rgba(168,85,247,0.6)) drop-shadow(0 0 48px rgba(249,115,22,0.3));
   }
-  @keyframes glow {
-    0%,100% { filter: drop-shadow(0 0 20px rgba(124,58,237,0.3)); }
-    50% { filter: drop-shadow(0 0 40px rgba(124,58,237,0.6)); }
+
+  .splash-studio {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px; font-weight: 400;
+    letter-spacing: .35em; text-transform: uppercase;
+    color: #C4B5FD; margin-bottom: 10px;
   }
-  .splash-studio { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: var(--t2); margin-bottom: 8px; }
-  .splash-tagline { font-size: 14px; font-weight: 300; color: var(--t3); letter-spacing: .06em; margin-bottom: 40px; text-align: center; }
+
+  .splash-services {
+    font-size: 11px; font-weight: 300;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: #6B7280; margin-bottom: 6px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .splash-dot-v { width: 5px; height: 5px; border-radius: 50%; background: #A855F7; }
+  .splash-dot-o { width: 5px; height: 5px; border-radius: 50%; background: #F97316; }
+
+  .splash-line-grad {
+    width: 120px; height: 2px; border-radius: 2px;
+    background: linear-gradient(90deg, #A855F7, #F97316);
+    margin-bottom: 32px;
+  }
+  .splash-tagline {
+    font-size: 14px; font-weight: 300;
+    color: var(--t3); letter-spacing: .06em;
+    margin-bottom: 40px; text-align: center;
+  }
   .splash-btn {
     background: linear-gradient(135deg, var(--violet) 0%, var(--violet-light) 100%);
-    color: var(--white); border: none; border-radius: 50px;
-    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
-    padding: 16px 40px; cursor: pointer; width: 100%; max-width: 300px;
-    transition: transform .15s, opacity .15s; margin-bottom: 12px;
+    color: var(--white);
+    border: none; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 500;
+    padding: 16px 40px; cursor: pointer;
+    width: 100%; max-width: 300px;
+    transition: transform .15s, opacity .15s;
+    margin-bottom: 12px;
     box-shadow: 0 8px 32px rgba(124,58,237,0.4);
   }
   .splash-btn:active { transform: scale(.97); opacity: .9; }
@@ -90,95 +122,237 @@
 
   /* Header */
   .header {
-    background: rgba(10,10,15,0.95); backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border); padding: 14px 20px;
+    background: rgba(10,10,15,0.95);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
     display: flex; align-items: center; gap: 12px;
     position: sticky; top: 0; z-index: 10;
   }
-  .h-logo { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; background: linear-gradient(135deg, var(--white) 0%, var(--violet-light) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -.01em; }
+  .h-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px; font-weight: 800;
+    background: linear-gradient(135deg, var(--white) 0%, var(--violet-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -.01em;
+  }
   .h-sub { font-size: 10px; color: var(--t3); letter-spacing: .1em; text-transform: uppercase; margin-top: 1px; }
-  .h-cta { margin-left: auto; background: linear-gradient(135deg, var(--violet) 0%, var(--violet-light) 100%); color: var(--white); border: none; border-radius: 20px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; padding: 8px 16px; cursor: pointer; text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: opacity .15s; box-shadow: 0 4px 14px rgba(124,58,237,0.35); }
+  .h-cta {
+    margin-left: auto;
+    background: linear-gradient(135deg, var(--violet) 0%, var(--violet-light) 100%);
+    color: var(--white);
+    border: none; border-radius: 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 500;
+    padding: 8px 16px; cursor: pointer;
+    text-decoration: none; white-space: nowrap;
+    flex-shrink: 0; transition: opacity .15s;
+    box-shadow: 0 4px 14px rgba(124,58,237,0.35);
+  }
   .h-cta:active { opacity: .85; }
 
   /* Hero */
-  .hero { padding: 40px 20px 32px; border-bottom: 1px solid var(--border); }
-  .hero-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--violet-light); background: var(--violet-dim); border: 1px solid var(--violet-border); padding: 5px 14px; border-radius: 20px; margin-bottom: 18px; }
-  .hero-title { font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 700; color: var(--t1); line-height: 1.15; margin-bottom: 14px; letter-spacing: -.02em; }
-  .hero-title em { font-style: normal; background: linear-gradient(135deg, var(--violet-light) 0%, var(--gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .hero-sub { font-size: 15px; font-weight: 300; color: var(--t2); line-height: 1.7; margin-bottom: 24px; }
-  .hero-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 24px; }
-  .hs { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 10px; text-align: center; }
-  .hs-num { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 700; color: var(--violet-light); }
+  .hero {
+    padding: 40px 20px 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--violet-light);
+    background: var(--violet-dim);
+    border: 1px solid var(--violet-border);
+    padding: 5px 14px; border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px; font-weight: 700;
+    color: var(--t1); line-height: 1.15;
+    margin-bottom: 14px;
+    letter-spacing: -.02em;
+  }
+  .hero-title em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--violet-light) 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    font-size: 15px; font-weight: 300;
+    color: var(--t2); line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 10px; margin-bottom: 24px;
+  }
+  .hs {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px 10px; text-align: center;
+  }
+  .hs-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 24px; font-weight: 700;
+    color: var(--violet-light);
+  }
   .hs-label { font-size: 11px; color: var(--t3); margin-top: 4px; }
-  .hero-cta { display: block; width: 100%; background: linear-gradient(135deg, var(--violet) 0%, var(--violet-light) 100%); color: var(--white); border: none; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; padding: 16px; cursor: pointer; text-decoration: none; text-align: center; box-shadow: 0 8px 28px rgba(124,58,237,0.4); transition: opacity .15s; }
+
+  .hero-cta {
+    display: block; width: 100%;
+    background: linear-gradient(135deg, var(--violet) 0%, var(--violet-light) 100%);
+    color: var(--white); border: none; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 500;
+    padding: 16px; cursor: pointer;
+    text-decoration: none; text-align: center;
+    box-shadow: 0 8px 28px rgba(124,58,237,0.4);
+    transition: opacity .15s;
+  }
   .hero-cta:active { opacity: .85; }
 
   /* Section */
   .section { padding: 32px 20px 0; }
-  .sec-label { font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--t3); margin-bottom: 16px; }
-  .sec-title { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 700; color: var(--t1); margin-bottom: 8px; letter-spacing: -.01em; }
-  .sec-sub { font-size: 14px; font-weight: 300; color: var(--t2); line-height: 1.6; margin-bottom: 20px; }
+  .sec-label {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--t3); margin-bottom: 16px;
+  }
+  .sec-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px; font-weight: 700;
+    color: var(--t1); margin-bottom: 8px;
+    letter-spacing: -.01em;
+  }
+  .sec-sub {
+    font-size: 14px; font-weight: 300;
+    color: var(--t2); line-height: 1.6;
+    margin-bottom: 20px;
+  }
 
   /* About */
-  .about-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 20px; margin-bottom: 10px; }
-  .about-quote { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 500; color: var(--t1); line-height: 1.5; margin-bottom: 14px; font-style: italic; }
+  .about-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 20px; margin-bottom: 10px;
+  }
+  .about-quote {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px; font-weight: 500;
+    color: var(--t1); line-height: 1.5;
+    margin-bottom: 14px; font-style: italic;
+  }
   .about-quote span { color: var(--gold); font-style: normal; }
-  .about-text { font-size: 13px; font-weight: 300; color: var(--t2); line-height: 1.8; }
+  .about-text {
+    font-size: 13px; font-weight: 300;
+    color: var(--t2); line-height: 1.8;
+  }
 
   /* Services */
-  .service-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 12px; cursor: pointer; transition: border-color .2s; }
+  .service-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden; margin-bottom: 12px;
+    cursor: pointer; transition: border-color .2s;
+  }
   .service-card:active { border-color: rgba(255,255,255,0.15); }
   .service-card.featured { border-color: var(--violet-border); }
-  .service-card.selected { border-color: var(--violet-light) !important; box-shadow: 0 0 0 2px rgba(168,85,247,0.25); }
-  .sc-header { padding: 18px 20px; display: flex; align-items: center; gap: 14px; }
-  .sc-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+
+  .sc-header {
+    padding: 18px 20px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .sc-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
   .sc-info { flex: 1; }
-  .sc-name { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 600; color: var(--t1); margin-bottom: 3px; }
+  .sc-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px; font-weight: 600; color: var(--t1);
+    margin-bottom: 3px;
+  }
   .sc-desc { font-size: 12px; color: var(--t2); }
-  .sc-price { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: var(--violet-light); text-align: right; flex-shrink: 0; }
+  .sc-price {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px; font-weight: 700; color: var(--violet-light);
+    text-align: right; flex-shrink: 0;
+  }
   .sc-price span { font-size: 11px; font-family: 'DM Sans', sans-serif; color: var(--t3); display: block; }
   .sc-arrow { color: var(--t3); font-size: 14px; flex-shrink: 0; transition: transform .25s; }
   .service-card.open .sc-arrow { transform: rotate(180deg); }
-  .sc-detail { max-height: 0; overflow: hidden; transition: max-height .4s ease, opacity .3s ease; opacity: 0; }
-  .sc-detail.open { max-height: 500px; opacity: 1; }
-  .sc-detail-inner { border-top: 1px solid var(--border); padding: 16px 20px 18px; }
-  .sc-includes { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
-  .si { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--t2); }
+
+  .sc-detail {
+    max-height: 0; overflow: hidden;
+    transition: max-height .4s ease, opacity .3s ease;
+    opacity: 0;
+  }
+  .sc-detail.open { max-height: 400px; opacity: 1; }
+  .sc-detail-inner {
+    border-top: 1px solid var(--border);
+    padding: 16px 20px 18px;
+  }
+  .sc-includes {
+    display: flex; flex-direction: column; gap: 8px;
+    margin-bottom: 14px;
+  }
+  .si {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--t2);
+  }
   .si-dot { color: var(--violet-light); font-size: 10px; flex-shrink: 0; }
   .sc-cta {
     display: block; width: 100%;
     background: linear-gradient(135deg, var(--violet) 0%, var(--violet-light) 100%);
     color: var(--white); border: none; border-radius: 10px;
-    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
-    padding: 12px; cursor: pointer; text-decoration: none; text-align: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 500;
+    padding: 12px; cursor: pointer;
+    text-decoration: none; text-align: center;
     transition: opacity .15s;
   }
   .sc-cta:active { opacity: .85; }
 
-  /* Add-on cards toggleable */
-  .addon-card {
-    background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 16px 18px; display: flex; align-items: center; gap: 14px;
-    cursor: pointer; transition: border-color .2s, background .2s;
-    user-select: none;
-  }
-  .addon-card.selected {
-    border-color: var(--gold-border);
-    background: linear-gradient(135deg, rgba(240,180,41,0.08) 0%, rgba(124,58,237,0.08) 100%);
-  }
-  .addon-card.disabled { opacity: 0.4; pointer-events: none; }
-  .addon-check { width: 22px; height: 22px; border-radius: 6px; border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all .2s; font-size: 13px; }
-  .addon-card.selected .addon-check { background: var(--gold); border-color: var(--gold); }
-
   /* Portfolio */
-  .portfolio-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
-  .portfolio-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; display: flex; align-items: center; gap: 14px; cursor: pointer; transition: border-color .2s; }
+  .portfolio-grid {
+    display: flex; flex-direction: column; gap: 10px;
+    margin-bottom: 10px;
+  }
+  .portfolio-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    display: flex; align-items: center; gap: 14px;
+    cursor: pointer; transition: border-color .2s;
+  }
   .portfolio-card:active { border-color: rgba(255,255,255,0.15); }
-  .pc-icon { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+  .pc-icon {
+    width: 46px; height: 46px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
   .pc-info { flex: 1; }
-  .pc-name { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 600; color: var(--t1); margin-bottom: 3px; }
+  .pc-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px; font-weight: 600; color: var(--t1);
+    margin-bottom: 3px;
+  }
   .pc-type { font-size: 12px; color: var(--t2); }
-  .pc-badge { font-size: 10px; font-weight: 500; padding: 3px 10px; border-radius: 10px; flex-shrink: 0; white-space: nowrap; }
+  .pc-badge {
+    font-size: 10px; font-weight: 500;
+    padding: 3px 10px; border-radius: 10px;
+    flex-shrink: 0; white-space: nowrap;
+  }
   .badge-basic { background: var(--cyan-dim); color: var(--cyan); border: 1px solid var(--cyan-border); }
   .badge-sales { background: var(--violet-dim); color: var(--violet-light); border: 1px solid var(--violet-border); }
   .badge-complex { background: var(--gold-dim); color: var(--gold); border: 1px solid var(--gold-border); }
@@ -186,87 +360,115 @@
   a.portfolio-card { text-decoration: none; }
 
   /* Process */
-  .process-step { display: flex; gap: 14px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid var(--border); }
+  .process-step {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 16px 0; border-bottom: 1px solid var(--border);
+  }
   .process-step:last-child { border-bottom: none; }
-  .ps-num { width: 32px; height: 32px; border-radius: 50%; background: var(--violet-dim); border: 1px solid var(--violet-border); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--violet-light); flex-shrink: 0; margin-top: 2px; }
-  .ps-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 600; color: var(--t1); margin-bottom: 4px; }
+  .ps-num {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--violet-dim); border: 1px solid var(--violet-border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 700; color: var(--violet-light);
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .ps-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px; font-weight: 600; color: var(--t1);
+    margin-bottom: 4px;
+  }
   .ps-desc { font-size: 13px; font-weight: 300; color: var(--t2); line-height: 1.6; }
-  .ps-time { display: inline-block; margin-top: 6px; font-size: 11px; font-weight: 500; background: var(--gold-dim); color: var(--gold); border: 1px solid var(--gold-border); padding: 3px 10px; border-radius: 10px; }
+  .ps-time {
+    display: inline-block; margin-top: 6px;
+    font-size: 11px; font-weight: 500;
+    background: var(--gold-dim); color: var(--gold);
+    border: 1px solid var(--gold-border);
+    padding: 3px 10px; border-radius: 10px;
+  }
 
   /* CTA block */
-  .cta-block { margin: 32px 20px 40px; background: var(--bg2); border: 1px solid var(--violet-border); border-radius: var(--radius); padding: 32px 24px; text-align: center; background-image: radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.1) 0%, transparent 60%); }
-  .cb-number { font-family: 'Syne', sans-serif; font-size: 48px; font-weight: 800; background: linear-gradient(135deg, var(--violet-light) 0%, var(--gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 6px; }
-  .cb-title { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 700; color: var(--t1); line-height: 1.2; margin-bottom: 8px; }
-  .cb-sub { font-size: 13px; font-weight: 300; color: var(--t2); margin-bottom: 24px; line-height: 1.6; }
-  .cb-btn { display: block; width: 100%; background: linear-gradient(135deg, var(--violet) 0%, var(--violet-light) 100%); color: var(--white); border: none; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; padding: 16px; cursor: pointer; text-decoration: none; margin-bottom: 10px; box-shadow: 0 8px 28px rgba(124,58,237,0.4); transition: opacity .15s; }
-  .cb-btn:active { opacity: .85; }
-  .cb-btn.outline { background: transparent; border: 1px solid var(--border); color: var(--t2); box-shadow: none; }
-  .cb-verse { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 12px; font-style: italic; color: var(--t3); line-height: 1.6; }
-  .cb-verse span { color: var(--gold); }
-
-  /* QUOTE MODAL */
-  #quote-overlay {
-    position: fixed; inset: 0; z-index: 200;
-    background: rgba(0,0,0,0.7); backdrop-filter: blur(6px);
-    display: none; align-items: flex-end; justify-content: center;
-    padding: 0;
-  }
-  #quote-overlay.open { display: flex; }
-  #quote-sheet {
+  .cta-block {
+    margin: 32px 20px 40px;
     background: var(--bg2);
     border: 1px solid var(--violet-border);
-    border-bottom: none;
-    border-radius: 24px 24px 0 0;
-    width: 100%; max-width: 520px;
-    max-height: 92vh;
-    overflow-y: auto;
-    padding: 28px 20px 40px;
-    animation: slideUp .35s ease;
+    border-radius: var(--radius);
+    padding: 32px 24px; text-align: center;
+    background-image: radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.1) 0%, transparent 60%);
   }
-  @keyframes slideUp {
-    from { transform: translateY(60px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+  .cb-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 48px; font-weight: 800;
+    background: linear-gradient(135deg, var(--violet-light) 0%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
   }
-  .qs-handle { width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 24px; }
-  .qs-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; color: var(--t1); margin-bottom: 4px; }
-  .qs-subtitle { font-size: 13px; color: var(--t2); margin-bottom: 24px; line-height: 1.5; }
-
-  /* Quote line items */
-  .q-line { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); gap: 12px; }
-  .q-line:last-of-type { border-bottom: none; }
-  .q-line-name { font-size: 14px; color: var(--t1); flex: 1; }
-  .q-line-sub { font-size: 11px; color: var(--t3); margin-top: 2px; }
-  .q-line-price { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--violet-light); white-space: nowrap; }
-
-  .q-total-box { background: var(--violet-dim); border: 1px solid var(--violet-border); border-radius: 14px; padding: 16px 18px; margin: 16px 0 8px; display: flex; justify-content: space-between; align-items: center; }
-  .q-total-label { font-size: 13px; color: var(--t2); }
-  .q-total-amount { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: var(--violet-light); }
-
-  .q-disclaimer { font-size: 11px; color: var(--t3); line-height: 1.6; text-align: center; margin-bottom: 20px; padding: 10px 14px; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid var(--border); }
-  .q-disclaimer span { color: var(--gold); }
-
-  .q-wa-btn {
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-    width: 100%; padding: 15px;
-    background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
-    color: white; border: none; border-radius: 50px;
-    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600;
-    cursor: pointer; text-decoration: none;
-    box-shadow: 0 8px 24px rgba(34,197,94,0.3);
-    transition: opacity .15s; margin-bottom: 10px;
+  .cb-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 24px; font-weight: 700;
+    color: var(--t1); line-height: 1.2; margin-bottom: 8px;
   }
-  .q-wa-btn:active { opacity: .85; }
-  .q-back-btn { display: block; width: 100%; padding: 13px; background: transparent; border: 1px solid var(--border); border-radius: 50px; color: var(--t3); font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; text-align: center; transition: border-color .2s; }
-  .q-back-btn:active { border-color: var(--t2); }
-
-  /* Addons section inside quote */
-  .q-addons-title { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--t3); margin: 20px 0 10px; }
+  .cb-sub { font-size: 13px; font-weight: 300; color: var(--t2); margin-bottom: 24px; line-height: 1.6; }
+  .cb-btn {
+    display: block; width: 100%;
+    background: linear-gradient(135deg, var(--violet) 0%, var(--violet-light) 100%);
+    color: var(--white); border: none; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 500;
+    padding: 16px; cursor: pointer;
+    text-decoration: none; margin-bottom: 10px;
+    box-shadow: 0 8px 28px rgba(124,58,237,0.4);
+    transition: opacity .15s;
+  }
+  .cb-btn:active { opacity: .85; }
+  .cb-btn.outline {
+    background: transparent;
+    border: 1px solid var(--border); color: var(--t2);
+    box-shadow: none;
+  }
+  .cb-verse {
+    margin-top: 16px; padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-size: 12px; font-style: italic;
+    color: var(--t3); line-height: 1.6;
+  }
+  .cb-verse span { color: var(--gold); }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(14px); }
     to { opacity: 1; transform: translateY(0); }
   }
   .fade-in { animation: fadeUp .4s ease forwards; }
+
+  .addon-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; display: flex; align-items: center; gap: 14px; cursor: pointer; transition: border-color .2s, background .2s; user-select: none; }
+  .addon-card.selected { border-color: var(--gold-border); background: linear-gradient(135deg, rgba(240,180,41,0.08) 0%, rgba(124,58,237,0.08) 100%); }
+  .addon-card.disabled { opacity: 0.4; pointer-events: none; }
+  .addon-check { width: 22px; height: 22px; border-radius: 6px; border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all .2s; font-size: 13px; color: #000; }
+  .addon-card.selected .addon-check { background: var(--gold); border-color: var(--gold); }
+  /* Quote modal */
+  #quote-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.7); backdrop-filter: blur(6px); display: none; align-items: flex-end; justify-content: center; }
+  #quote-overlay.open { display: flex; }
+  #quote-sheet { background: var(--bg2); border: 1px solid var(--violet-border); border-bottom: none; border-radius: 24px 24px 0 0; width: 100%; max-width: 520px; max-height: 92vh; overflow-y: auto; padding: 28px 20px 40px; animation: slideUp .35s ease; }
+  @keyframes slideUp { from { transform: translateY(60px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  .qs-handle { width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 24px; }
+  .qs-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 700; color: var(--t1); margin-bottom: 4px; }
+  .qs-subtitle { font-size: 13px; color: var(--t2); margin-bottom: 24px; line-height: 1.5; }
+  .q-line { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border); gap: 12px; }
+  .q-line:last-of-type { border-bottom: none; }
+  .q-line-name { font-size: 14px; color: var(--t1); flex: 1; }
+  .q-line-sub { font-size: 11px; color: var(--t3); margin-top: 2px; }
+  .q-line-price { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--violet-light); white-space: nowrap; }
+  .q-total-box { background: var(--violet-dim); border: 1px solid var(--violet-border); border-radius: 14px; padding: 16px 18px; margin: 16px 0 8px; display: flex; justify-content: space-between; align-items: center; }
+  .q-total-label { font-size: 13px; color: var(--t2); }
+  .q-total-amount { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 800; color: var(--violet-light); }
+  .q-disclaimer { font-size: 11px; color: var(--t3); line-height: 1.6; text-align: center; margin-bottom: 20px; padding: 10px 14px; background: rgba(255,255,255,0.03); border-radius: 8px; border: 1px solid var(--border); }
+  .q-disclaimer span { color: var(--gold); }
+  .q-wa-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 15px; background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%); color: white; border: none; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; box-shadow: 0 8px 24px rgba(34,197,94,0.3); transition: opacity .15s; margin-bottom: 10px; }
+  .q-wa-btn:active { opacity: .85; }
+  .q-back-btn { display: block; width: 100%; padding: 13px; background: transparent; border: 1px solid var(--border); border-radius: 50px; color: var(--t3); font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; text-align: center; }
+  .q-addons-title { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--t3); margin: 20px 0 10px; }
 </style>
 </head>
 <body>
@@ -275,7 +477,14 @@
 <div id="splash">
   <div class="splash-number">490</div>
   <div class="splash-studio">Studio</div>
-  <div class="splash-tagline">Microsites que conectan · Guadalajara & Puerto Vallarta</div>
+  <div class="splash-services">
+    <span>Diseño</span>
+    <div class="splash-dot-v"></div>
+    <span>Desarrollo</span>
+    <div class="splash-dot-o"></div>
+    <span>Estrategia</span>
+  </div>
+  <div class="splash-line-grad"></div>
   <button class="splash-btn" onclick="startApp()">Conocer el estudio ✦</button>
   <div class="splash-city">Diseño interactivo para negocios que quieren crecer</div>
 </div>
@@ -288,7 +497,7 @@
       <div class="h-logo">490 Studio</div>
       <div class="h-sub">Microsites que conectan</div>
     </div>
-    <a href="#contacto" class="h-cta">Hablemos ✦</a>
+    <a href="https://wa.me/523333023559?text=Hola%2C%20me%20interesa%20un%20microsite%20para%20mi%20negocio" target="_blank" class="h-cta">Hablemos ✦</a>
   </div>
 
   <!-- Hero -->
@@ -297,9 +506,18 @@
     <div class="hero-title">Tu negocio merece<br>una <em>presencia digital</em><br>que realmente conecte</div>
     <div class="hero-sub">Creamos microsites interactivos que reemplazan los PDFs aburridos, los grupos de WhatsApp caóticos y las preguntas repetidas — y llevan a tus clientes directo a la acción.</div>
     <div class="hero-stats">
-      <div class="hs"><div class="hs-num">8+</div><div class="hs-label">proyectos entregados</div></div>
-      <div class="hs"><div class="hs-num">5</div><div class="hs-label">días de entrega</div></div>
-      <div class="hs"><div class="hs-num">∞</div><div class="hs-label">sin límite de revisiones</div></div>
+      <div class="hs">
+        <div class="hs-num">8+</div>
+        <div class="hs-label">proyectos entregados</div>
+      </div>
+      <div class="hs">
+        <div class="hs-num">5</div>
+        <div class="hs-label">días de entrega</div>
+      </div>
+      <div class="hs">
+        <div class="hs-num">∞</div>
+        <div class="hs-label">sin límite de revisiones</div>
+      </div>
     </div>
     <a href="#contacto" class="hero-cta">Quiero mi microsite →</a>
   </div>
@@ -309,7 +527,7 @@
     <div class="sec-label">Sobre 490 Studio</div>
     <div class="about-card">
       <div class="about-quote">"Nació de una necesidad real — la mía. Vi cómo un microsite interactivo podía <span>transformar la forma en que un negocio se comunica</span> con sus clientes."</div>
-      <div class="about-text">Soy Ana Jasso, diseñadora de experiencias digitales interactivas desde Guadalajara, con presencia en Puerto Vallarta. Cada microsite que creo está pensado para que tu cliente entienda, confíe y actúe — sin confusión, sin llamadas innecesarias, sin PDFs que nadie abre.<br><br>El nombre 490 viene de "setenta veces siete" — un deseo genuino para cada cliente que trabaja conmigo.</div>
+      <div class="about-text">Soy Ana Jasso, diseñadora de experiencias digitales interactivas desde Guadalajara, con presencia en Puerto Vallarta. Cada microsite que creo está pensado para que tu cliente entienda, confíe y actúe — sin confusión, sin llamadas innecesarias, sin PDFs que nadie abre.<br><br>Cada proyecto que sale de aquí lleva un deseo: <em>que tu impacto crezca 70 veces 7.</em></div>
     </div>
   </div>
 
@@ -317,7 +535,7 @@
   <div class="section">
     <div class="sec-label">Servicios y precios</div>
 
-    <div class="service-card" id="card-s1" onclick="toggleService('s1')">
+    <div class="service-card" onclick="toggleService('s1')">
       <div class="sc-header">
         <div class="sc-icon" style="background:var(--cyan-dim);border:1px solid var(--cyan-border);">📋</div>
         <div class="sc-info">
@@ -341,7 +559,7 @@
       </div>
     </div>
 
-    <div class="service-card featured" id="card-s2" onclick="toggleService('s2')">
+    <div class="service-card featured" onclick="toggleService('s2')">
       <div class="sc-header">
         <div class="sc-icon" style="background:var(--violet-dim);border:1px solid var(--violet-border);">🚀</div>
         <div class="sc-info">
@@ -366,7 +584,7 @@
       </div>
     </div>
 
-    <div class="service-card" id="card-s3" onclick="toggleService('s3')">
+    <div class="service-card" onclick="toggleService('s3')">
       <div class="sc-header">
         <div class="sc-icon" style="background:var(--gold-dim);border:1px solid var(--gold-border);">✦</div>
         <div class="sc-info">
@@ -391,7 +609,7 @@
       </div>
     </div>
 
-    <div class="service-card" id="card-s4" onclick="toggleService('s4')">
+    <div class="service-card" onclick="toggleService('s4')">
       <div class="sc-header">
         <div class="sc-icon" style="background:rgba(255,255,255,0.05);border:1px solid var(--border);">🔄</div>
         <div class="sc-info">
@@ -425,54 +643,26 @@
       <div class="addon-card" id="addon-paleta" onclick="toggleAddon('paleta',800,'Paleta de colores')">
         <div class="addon-check" id="check-paleta"></div>
         <div style="width:42px;height:42px;border-radius:12px;background:var(--gold-dim);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🎨</div>
-        <div style="flex:1;">
-          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--t1);margin-bottom:2px;">Paleta de colores</div>
-          <div style="font-size:12px;color:var(--t2);">5 colores + tipografías + guía de uso</div>
-        </div>
-        <div style="text-align:right;flex-shrink:0;">
-          <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--gold);">+$800</div>
-          <div style="font-size:10px;color:var(--t3);margin-top:2px;">add-on</div>
-        </div>
+        <div style="flex:1;"><div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--t1);margin-bottom:2px;">Paleta de colores</div><div style="font-size:12px;color:var(--t2);">5 colores + tipografías + guía de uso</div></div>
+        <div style="text-align:right;flex-shrink:0;"><div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--gold);">+$800</div><div style="font-size:10px;color:var(--t3);margin-top:2px;">add-on</div></div>
       </div>
-
       <div class="addon-card" id="addon-naming" onclick="toggleAddon('naming',1200,'Naming')">
         <div class="addon-check" id="check-naming"></div>
         <div style="width:42px;height:42px;border-radius:12px;background:var(--gold-dim);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">✏️</div>
-        <div style="flex:1;">
-          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--t1);margin-bottom:2px;">Naming</div>
-          <div style="font-size:12px;color:var(--t2);">Nombre de marca + significado + opciones</div>
-        </div>
-        <div style="text-align:right;flex-shrink:0;">
-          <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--gold);">+$1,200</div>
-          <div style="font-size:10px;color:var(--t3);margin-top:2px;">add-on</div>
-        </div>
+        <div style="flex:1;"><div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--t1);margin-bottom:2px;">Naming</div><div style="font-size:12px;color:var(--t2);">Nombre de marca + significado + opciones</div></div>
+        <div style="text-align:right;flex-shrink:0;"><div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--gold);">+$1,200</div><div style="font-size:10px;color:var(--t3);margin-top:2px;">add-on</div></div>
       </div>
-
       <div class="addon-card" id="addon-logo" onclick="toggleAddon('logo',2500,'Logo básico')">
         <div class="addon-check" id="check-logo"></div>
         <div style="width:42px;height:42px;border-radius:12px;background:var(--gold-dim);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🖼️</div>
-        <div style="flex:1;">
-          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--t1);margin-bottom:2px;">Logo básico</div>
-          <div style="font-size:12px;color:var(--t2);">Logotipo en versión color y blanco/negro</div>
-        </div>
-        <div style="text-align:right;flex-shrink:0;">
-          <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--gold);">+$2,500</div>
-          <div style="font-size:10px;color:var(--t3);margin-top:2px;">add-on</div>
-        </div>
+        <div style="flex:1;"><div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--t1);margin-bottom:2px;">Logo básico</div><div style="font-size:12px;color:var(--t2);">Logotipo en versión color y blanco/negro</div></div>
+        <div style="text-align:right;flex-shrink:0;"><div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--gold);">+$2,500</div><div style="font-size:10px;color:var(--t3);margin-top:2px;">add-on</div></div>
       </div>
-
       <div class="addon-card" id="addon-branding" onclick="toggleAddon('branding',3500,'Branding completo')">
         <div class="addon-check" id="check-branding"></div>
         <div style="width:42px;height:42px;border-radius:12px;background:var(--gold-dim);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⭐</div>
-        <div style="flex:1;">
-          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--t1);margin-bottom:2px;">Branding completo</div>
-          <div style="font-size:12px;color:var(--t2);">Naming + paleta + logo · Todo incluido</div>
-          <div style="font-size:10px;color:var(--gold);margin-top:4px;font-weight:500;">✦ Ahorras $1,000 vs. individual</div>
-        </div>
-        <div style="text-align:right;flex-shrink:0;">
-          <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--gold);">+$3,500</div>
-          <div style="font-size:10px;color:var(--t3);margin-top:2px;">add-on</div>
-        </div>
+        <div style="flex:1;"><div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--t1);margin-bottom:2px;">Branding completo</div><div style="font-size:12px;color:var(--t2);">Naming + paleta + logo · Todo incluido</div><div style="font-size:10px;color:var(--gold);margin-top:4px;font-weight:500;">✦ Ahorras $1,000 vs. individual</div></div>
+        <div style="text-align:right;flex-shrink:0;"><div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--gold);">+$3,500</div><div style="font-size:10px;color:var(--t3);margin-top:2px;">add-on</div></div>
       </div>
     </div>
 
@@ -564,11 +754,46 @@
   <div class="section">
     <div class="sec-label">Cómo trabajamos</div>
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:6px 20px;margin-bottom:10px;">
-      <div class="process-step"><div class="ps-num">1</div><div><div class="ps-title">Me cuentas tu proyecto</div><div class="ps-desc">Por WhatsApp me compartes de qué trata tu negocio, qué necesitas comunicar y a quién va dirigido.</div><div class="ps-time">⚡ Mismo día</div></div></div>
-      <div class="process-step"><div class="ps-num">2</div><div><div class="ps-title">Te propongo la estructura</div><div class="ps-desc">Te envío una propuesta de secciones, flujo y estética. Ajustamos hasta que quede perfecto antes de arrancar.</div><div class="ps-time">⚡ 24–48 horas</div></div></div>
-      <div class="process-step"><div class="ps-num">3</div><div><div class="ps-title">Diseño y desarrollo</div><div class="ps-desc">Construyo tu microsite con identidad visual propia — colores, tipografía y tono que representen a tu negocio.</div><div class="ps-time">⚡ 3–7 días</div></div></div>
-      <div class="process-step"><div class="ps-num">4</div><div><div class="ps-title">Revisiones y ajustes</div><div class="ps-desc">Revisamos juntos y hacemos los ajustes de esa ronda. Cualquier cambio después de la entrega final se maneja como actualización.</div><div class="ps-time">⚡ 1–2 días</div></div></div>
-      <div class="process-step"><div class="ps-num">5</div><div><div class="ps-title">Publicación y listo</div><div class="ps-desc">Te ayudo a publicarlo en GitHub Pages o donde prefieras. Te entrego el archivo y el link para compartir.</div><div class="ps-time">⚡ Mismo día</div></div></div>
+      <div class="process-step">
+        <div class="ps-num">1</div>
+        <div>
+          <div class="ps-title">Me cuentas tu proyecto</div>
+          <div class="ps-desc">Por WhatsApp me compartes de qué trata tu negocio, qué necesitas comunicar y a quién va dirigido.</div>
+          <div class="ps-time">⚡ Mismo día</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="ps-num">2</div>
+        <div>
+          <div class="ps-title">Te propongo la estructura</div>
+          <div class="ps-desc">Te envío una propuesta de secciones, flujo y estética. Ajustamos hasta que quede perfecto antes de arrancar.</div>
+          <div class="ps-time">⚡ 24–48 horas</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="ps-num">3</div>
+        <div>
+          <div class="ps-title">Diseño y desarrollo</div>
+          <div class="ps-desc">Construyo tu microsite con identidad visual propia — colores, tipografía y tono que representen a tu negocio.</div>
+          <div class="ps-time">⚡ 3–7 días</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="ps-num">4</div>
+        <div>
+          <div class="ps-title">Revisiones y ajustes</div>
+          <div class="ps-desc">Revisamos juntos y hacemos los ajustes de esa ronda. Cualquier cambio después de la entrega final se maneja como actualización.</div>
+          <div class="ps-time">⚡ 1–2 días</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="ps-num">5</div>
+        <div>
+          <div class="ps-title">Publicación y listo</div>
+          <div class="ps-desc">Te ayudo a publicarlo en GitHub Pages o donde prefieras. Te entrego el archivo y el link para compartir.</div>
+          <div class="ps-time">⚡ Mismo día</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -577,33 +802,25 @@
     <div class="cb-number">490</div>
     <div class="cb-title">¿Listo para conectar<br>con tus clientes?</div>
     <div class="cb-sub">Cuéntame tu proyecto por WhatsApp — en menos de 24 horas te tengo una propuesta.</div>
-    <a href="https://wa.me/523312345678?text=Hola%2C%20me%20interesa%20un%20microsite%20para%20mi%20negocio" target="_blank" class="cb-btn">Escribir a 490 Studio ✦</a>
+    <a href="https://wa.me/523333023559?text=Hola%2C%20me%20interesa%20un%20microsite%20para%20mi%20negocio" target="_blank" class="cb-btn">Escribir a 490 Studio ✦</a>
     <a href="mailto:hola@490studio.mx" class="cb-btn outline">hola@490studio.mx</a>
-    <div class="cb-verse">"Lo que tu negocio siembra en la vida de tus clientes,<br>que vuelva a ti en <span>abundancia sin límite</span>."<br><br>— Con ese deseo crea cada microsite 490 Studio</div>
+    <div class="cb-verse">"Que tu impacto crezca <span>70 veces 7.</span>"<br><br>— Con ese deseo trabaja cada proyecto 490 Studio</div>
   </div>
 
 </div>
+
 
 <!-- QUOTE OVERLAY -->
 <div id="quote-overlay" onclick="handleOverlayClick(event)">
   <div id="quote-sheet">
     <div class="qs-handle"></div>
     <div class="qs-title">Tu cotización estimada</div>
-    <div class="qs-subtitle">Selecciona los add-ons que necesites. El total se actualiza automáticamente.</div>
-
-    <!-- Main service line -->
+    <div class="qs-subtitle">Agrega los add-ons que necesites. El total se actualiza al instante.</div>
     <div id="q-main-line" class="q-line">
-      <div>
-        <div class="q-line-name" id="q-service-name">—</div>
-        <div class="q-line-sub">Servicio principal</div>
-      </div>
+      <div><div class="q-line-name" id="q-service-name">—</div><div class="q-line-sub">Servicio principal</div></div>
       <div class="q-line-price" id="q-service-price">—</div>
     </div>
-
-    <!-- Add-on lines (shown when selected) -->
     <div id="q-addon-lines"></div>
-
-    <!-- Add-ons selector inside quote -->
     <div class="q-addons-title">¿Agregas branding?</div>
     <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:4px;">
       <div class="addon-card" id="qaddon-paleta" onclick="toggleAddon('paleta',800,'Paleta de colores')">
@@ -631,20 +848,11 @@
         <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--gold);white-space:nowrap;">+$3,500</div>
       </div>
     </div>
-
-    <!-- Total -->
     <div class="q-total-box">
-      <div>
-        <div class="q-total-label">Total estimado</div>
-        <div style="font-size:11px;color:var(--t3);margin-top:2px;">MXN · precio desde</div>
-      </div>
+      <div><div class="q-total-label">Total estimado</div><div style="font-size:11px;color:var(--t3);margin-top:2px;">MXN · precio desde</div></div>
       <div class="q-total-amount" id="q-total">$0</div>
     </div>
-
-    <div class="q-disclaimer">
-      ⚠️ Esta es una <span>cotización aproximada</span>. El precio final se confirma en la primera conversación, una vez que conozcamos los detalles de tu proyecto.
-    </div>
-
+    <div class="q-disclaimer">⚠️ Esta es una <span>cotización aproximada</span>. El precio final se confirma en la primera conversación, una vez que conozcamos los detalles de tu proyecto.</div>
     <button class="q-wa-btn" onclick="sendToWhatsApp()">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       Enviar cotización por WhatsApp
@@ -652,20 +860,16 @@
     <button class="q-back-btn" onclick="closeQuote()">← Seguir explorando</button>
   </div>
 </div>
-
 <script>
-  // ── State ──────────────────────────────────────────────
   var currentService = { name: '', price: 0 };
-  var selectedAddons = {}; // { id: { name, price } }
+  var selectedAddons = {};
 
-  // ── Splash ─────────────────────────────────────────────
   function startApp() {
     var s = document.getElementById('splash');
     s.classList.add('out');
     setTimeout(function() { s.style.display = 'none'; }, 600);
   }
 
-  // ── Service accordion ──────────────────────────────────
   function toggleService(id) {
     var detail = document.getElementById(id);
     var card = detail.closest('.service-card');
@@ -679,78 +883,46 @@
     }
   }
 
-  // ── Add-on toggle (works for both page and modal) ──────
   function toggleAddon(id, price, name) {
-    // If branding complete is selected, deselect individual ones and vice versa
-    if (id === 'branding') {
-      if (!selectedAddons[id]) {
-        // selecting branding complete → deselect individual
-        delete selectedAddons['paleta'];
-        delete selectedAddons['naming'];
-        delete selectedAddons['logo'];
-      }
-    } else {
-      // selecting individual → deselect branding complete
-      delete selectedAddons['branding'];
-    }
-
-    if (selectedAddons[id]) {
-      delete selectedAddons[id];
-    } else {
-      selectedAddons[id] = { name: name, price: price };
-    }
+    if (id === 'branding') { delete selectedAddons['paleta']; delete selectedAddons['naming']; delete selectedAddons['logo']; }
+    else { delete selectedAddons['branding']; }
+    if (selectedAddons[id]) { delete selectedAddons[id]; } else { selectedAddons[id] = { name: name, price: price }; }
     refreshAddonUI();
     refreshQuoteTotal();
   }
 
   function refreshAddonUI() {
-    var ids = ['paleta','naming','logo','branding'];
-    ids.forEach(function(id) {
-      var selected = !!selectedAddons[id];
-      // page cards
-      var card = document.getElementById('addon-' + id);
-      var check = document.getElementById('check-' + id);
-      if (card) { card.classList.toggle('selected', selected); }
-      if (check) { check.innerHTML = selected ? '✓' : ''; }
-      // modal cards
-      var qcard = document.getElementById('qaddon-' + id);
-      var qcheck = document.getElementById('qcheck-' + id);
-      if (qcard) { qcard.classList.toggle('selected', selected); }
-      if (qcheck) { qcheck.innerHTML = selected ? '✓' : ''; }
+    ['paleta','naming','logo','branding'].forEach(function(id) {
+      var sel = !!selectedAddons[id];
+      ['addon-','qaddon-'].forEach(function(p) {
+        var c = document.getElementById(p+id); if(c) c.classList.toggle('selected',sel);
+      });
+      ['check-','qcheck-'].forEach(function(p) {
+        var c = document.getElementById(p+id); if(c) c.innerHTML = sel ? '✓' : '';
+      });
     });
-
-    // mutual exclusivity visual hint
-    var brandingOn = !!selectedAddons['branding'];
-    var individualOn = selectedAddons['paleta'] || selectedAddons['naming'] || selectedAddons['logo'];
+    var bOn = !!selectedAddons['branding'];
+    var iOn = selectedAddons['paleta']||selectedAddons['naming']||selectedAddons['logo'];
     ['paleta','naming','logo'].forEach(function(id) {
-      var c = document.getElementById('addon-' + id);
-      var qc = document.getElementById('qaddon-' + id);
-      var dim = brandingOn && !selectedAddons[id];
-      if (c) c.classList.toggle('disabled', dim);
-      if (qc) qc.classList.toggle('disabled', dim);
+      var c=document.getElementById('addon-'+id); if(c) c.classList.toggle('disabled',bOn&&!selectedAddons[id]);
+      var q=document.getElementById('qaddon-'+id); if(q) q.classList.toggle('disabled',bOn&&!selectedAddons[id]);
     });
-    var bc = document.getElementById('addon-branding');
-    var qbc = document.getElementById('qaddon-branding');
-    var dimBranding = individualOn && !selectedAddons['branding'];
-    if (bc) bc.classList.toggle('disabled', dimBranding);
-    if (qbc) qbc.classList.toggle('disabled', dimBranding);
+    var bc=document.getElementById('addon-branding'); if(bc) bc.classList.toggle('disabled',iOn&&!selectedAddons['branding']);
+    var qbc=document.getElementById('qaddon-branding'); if(qbc) qbc.classList.toggle('disabled',iOn&&!selectedAddons['branding']);
   }
 
-  // ── Quote modal ────────────────────────────────────────
   function openQuote(e, serviceName, servicePrice) {
     e.stopPropagation();
     currentService = { name: serviceName, price: servicePrice };
     document.getElementById('q-service-name').textContent = serviceName;
     document.getElementById('q-service-price').textContent = '$' + servicePrice.toLocaleString('es-MX');
     refreshQuoteTotal();
-    var overlay = document.getElementById('quote-overlay');
-    overlay.classList.add('open');
+    document.getElementById('quote-overlay').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 
   function closeQuote() {
-    var overlay = document.getElementById('quote-overlay');
-    overlay.classList.remove('open');
+    document.getElementById('quote-overlay').classList.remove('open');
     document.body.style.overflow = '';
   }
 
@@ -763,16 +935,15 @@
     var lines = '';
     Object.values(selectedAddons).forEach(function(a) {
       total += a.price;
-      lines += '<div class="q-line"><div><div class="q-line-name">+ ' + a.name + '</div><div class="q-line-sub">Add-on de branding</div></div><div class="q-line-price">$' + a.price.toLocaleString('es-MX') + '</div></div>';
+      lines += '<div class="q-line"><div><div class="q-line-name">+ '+a.name+'</div><div class="q-line-sub">Add-on de branding</div></div><div class="q-line-price">$'+a.price.toLocaleString('es-MX')+'</div></div>';
     });
     document.getElementById('q-addon-lines').innerHTML = lines;
     document.getElementById('q-total').textContent = '$' + total.toLocaleString('es-MX');
   }
 
-  // ── WhatsApp sender ────────────────────────────────────
   function sendToWhatsApp() {
     var total = currentService.price;
-    var msg = '¡Hola! Estoy interesado/a en un microsite para mi negocio.\n\n';
+    var msg = '¡Hola! Estoy interesado/a en un microsite.\n\n';
     msg += '📋 *Cotización estimada 490 Studio*\n';
     msg += '─────────────────────\n';
     msg += '• ' + currentService.name + ': $' + currentService.price.toLocaleString('es-MX') + ' MXN\n';
@@ -784,8 +955,7 @@
     msg += '💰 *Total estimado: $' + total.toLocaleString('es-MX') + ' MXN*\n\n';
     msg += '_(Cotización aproximada — pendiente de confirmar detalles)_\n\n';
     msg += '¿Podemos agendar una llamada para platicar del proyecto?';
-    var url = 'https://wa.me/523312345678?text=' + encodeURIComponent(msg);
-    window.open(url, '_blank');
+    window.open('https://wa.me/523333023559?text=' + encodeURIComponent(msg), '_blank');
   }
 </script>
 </body>
